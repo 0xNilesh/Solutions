@@ -1,33 +1,54 @@
-#include<iostream>
- 
+#include<bits/stdc++.h>
 using namespace std;
- 
+
+int numfun(char c)
+{
+	if(c=='U')
+		return 1;
+
+	if(c=='D')
+		return -1;
+
+	if(c=='R')
+		return 1;
+
+	if(c=='L')
+		return -1;
+	return 0;
+}
 int main()
 {
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    int ar[n]={0},I=0,J=0,total=0;
-    for(int i=0;i<n;i++)
-    {
-        int num_of_sub=0,I=0,J=0;
-        for(int j=i;j<n;j++)
-        {
-            if(s[j]=='U')
-                J++;
-            else if(s[j]=='D')
-                J--;
-            else if(s[j]=='R')
-                I++;
-            else if(s[j]=='L')
-                I--;
-            if(I==0 && J==0)
-                num_of_sub++;
-        }
-        ar[i]=num_of_sub;
-    }
-    for(int i=0;i<n;i++)
-        total+=ar[i];
-    cout<<total;
+	int n;
+	int res=0;
+	cin>>n;
+	char A[n];
+	for(int i=0;i<n;i++)
+		cin>>A[i];
+	int x,y;
+	
+	for(int i=0;i<n-1;i++)
+	{
+		x=y=0;
+		if(A[i]=='U'||A[i]=='D')
+			x=numfun(A[i]);
+
+		else
+			y=numfun(A[i]);
+
+		for(int j=i+1;j<n;j++)
+		{
+
+			if(A[j]=='U'||A[j]=='D')
+				x+=numfun(A[j]);
+
+			else
+				y+=numfun(A[j]);
+
+			if(x==0&&y==0)
+				res++;
+		}
+	}
+	cout<<res;
+
+	return 0;
 }
